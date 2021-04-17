@@ -1,6 +1,6 @@
 /*
-EP1 - Jogo da vida de Conway
-Olavo M - 03D
+Jogo da vida de Conway
+Olavo M
 */
 
 #include <stdio.h>
@@ -22,8 +22,8 @@ void imprimirMatriz(int matriz[][TAM]){ //imprime a matriz com seus indices
     for (int i=0;i<TAM;i++){
         printf("%c ", (char)(i+65)); //letra da linha, as letras ajudam a nao confundir o usuario
         for(int j=0;j<TAM;j++){
-            if (matriz[i][j] == 0) printf("__"); //morto imprime como underline (quadrado vazio) na tela
-            else printf ("■"); //vivo imprime como quadrado cheio, OBS: o caractere pode ter sido alterado devido a codificacao
+            if (matriz[i][j] == 0) printf("_"); //morto imprime como underline (quadrado vazio) na tela
+            else printf ("@"); //vivo imprime como @ (quadrado cheio)
             printf("|");
         }
         printf("\n");
