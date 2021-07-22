@@ -4,4 +4,4 @@
  A interação com o usuário foi projetada e compilada para a plataforma windows.
 
 ## Demo
-![GameOfLifeDemo](https://user-images.githubusercontent.com/54750022/126707393-05144a6e-cc82-4424-909e-d5a67d078f51.gif)
+![GameOfLifeDemo](https://user-images.githubusercontent.com/54750022/126708935-46729e3a-9117-4ce7-a5c7-0279e04d9310.gif)
