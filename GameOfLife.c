@@ -56,6 +56,71 @@ void copiarMatriz(int original[][TAM], int copia[][TAM])
     }
 }
 
+void pradraoBlock(int matriz[][TAM])
+{
+    matriz[6][6]=1;
+    matriz[6][7]=1;
+    matriz[7][6]=1;
+    matriz[7][7]=1;
+}
+
+void pradraoBeeHive(int matriz[][TAM])
+{
+    matriz[5][6]=1;
+    matriz[5][7]=1;
+    matriz[6][5]=1;
+    matriz[6][8]=1;
+    matriz[7][6]=1;
+    matriz[7][7]=1;
+}
+
+void pradraoBlinker(int matriz[][TAM])
+{
+    matriz[5][6]=1;
+    matriz[6][6]=1;
+    matriz[7][6]=1;
+}
+
+void pradraoPulsar(int matriz[][TAM])
+{
+    matriz[1][3]=1; matriz[1][4]=1; matriz[1][5]=1;
+    matriz[1][9]=1; matriz[1][10]=1; matriz[1][11]=1;
+    matriz[3][1]=1; matriz[3][6]=1; matriz[3][8]=1;
+    matriz[3][13]=1; matriz[4][1]=1; matriz[4][6]=1;
+    matriz[4][8]=1; matriz[4][13]=1; matriz[5][1]=1;
+    matriz[5][6]=1; matriz[5][8]=1; matriz[5][13]=1;
+    matriz[6][3]=1; matriz[6][4]=1; matriz[6][5]=1;
+    matriz[6][9]=1; matriz[6][10]=1; matriz[6][11]=1;
+    matriz[8][3]=1; matriz[8][4]=1; matriz[8][5]=1;
+    matriz[8][9]=1; matriz[8][10]=1; matriz[8][11]=1;
+    matriz[9][1]=1; matriz[9][6]=1; matriz[9][8]=1;
+    matriz[9][13]=1; matriz[10][1]=1; matriz[10][6]=1;
+    matriz[10][8]=1; matriz[10][13]=1; matriz[13][3]=1;
+    matriz[13][4]=1; matriz[13][5]=1; matriz[13][9]=1;
+    matriz[13][10]=1; matriz[13][11]=1; matriz[11][1]=1;
+    matriz[11][6]=1; matriz[11][8]=1; matriz[11][13]=1;
+}
+
+void pradraoGlider(int matriz[][TAM])
+{
+    matriz[1][2]=1;
+    matriz[2][3]=1;
+    matriz[3][1]=1;
+    matriz[3][2]=1;
+    matriz[3][3]=1;
+}
+
+void pradraoHeavyWeightSpaceship(int matriz[][TAM])
+{
+    matriz[5][2]=1; matriz[5][3]=1;
+    matriz[5][4]=1; matriz[5][5]=1;
+    matriz[5][6]=1; matriz[5][7]=1;
+    matriz[6][1]=1; matriz[6][7]=1;
+    matriz[7][7]=1; matriz[8][1]=1;
+    matriz[8][6]=1; matriz[9][3]=1;
+    matriz[9][4]=1;
+}
+
 // Retorna o numero de vizinhos vivos
 int contarVizinhos(int matriz[][TAM], int linha, int coluna)
 {
@@ -220,62 +285,27 @@ int main(){
                 }
                 else if(opcPadrao == 1) // Preenche a matriz com o padrao escolhido, no caso o Block
                 {
-                    matrizAtual[6][6]=1;
-                    matrizAtual[6][7]=1;
-                    matrizAtual[7][6]=1;
-                    matrizAtual[7][7]=1;
+                    pradraoBlock(matrizAtual);
                 }
                 else if(opcPadrao == 2) // Bee-hive
                 {
-                    matrizAtual[5][6]=1;
-                    matrizAtual[5][7]=1;
-                    matrizAtual[6][5]=1;
-                    matrizAtual[6][8]=1;
-                    matrizAtual[7][6]=1;
-                    matrizAtual[7][7]=1;
+                    pradraoBeeHive(matrizAtual);
                 }
                 else if(opcPadrao == 3) // Blinker
                 {
-                    matrizAtual[5][6]=1;
-                    matrizAtual[6][6]=1;
-                    matrizAtual[7][6]=1;
+                    pradraoBlinker(matrizAtual);
                 }
                 else if(opcPadrao == 4) // Pulsar
                 {
-                    matrizAtual[1][3]=1; matrizAtual[1][4]=1; matrizAtual[1][5]=1;
-                    matrizAtual[1][9]=1; matrizAtual[1][10]=1; matrizAtual[1][11]=1;
-                    matrizAtual[3][1]=1; matrizAtual[3][6]=1; matrizAtual[3][8]=1;
-                    matrizAtual[3][13]=1; matrizAtual[4][1]=1; matrizAtual[4][6]=1;
-                    matrizAtual[4][8]=1; matrizAtual[4][13]=1; matrizAtual[5][1]=1;
-                    matrizAtual[5][6]=1; matrizAtual[5][8]=1; matrizAtual[5][13]=1;
-                    matrizAtual[6][3]=1; matrizAtual[6][4]=1; matrizAtual[6][5]=1;
-                    matrizAtual[6][9]=1; matrizAtual[6][10]=1; matrizAtual[6][11]=1;
-                    matrizAtual[8][3]=1; matrizAtual[8][4]=1; matrizAtual[8][5]=1;
-                    matrizAtual[8][9]=1; matrizAtual[8][10]=1; matrizAtual[8][11]=1;
-                    matrizAtual[9][1]=1; matrizAtual[9][6]=1; matrizAtual[9][8]=1;
-                    matrizAtual[9][13]=1; matrizAtual[10][1]=1; matrizAtual[10][6]=1;
-                    matrizAtual[10][8]=1; matrizAtual[10][13]=1; matrizAtual[13][3]=1;
-                    matrizAtual[13][4]=1; matrizAtual[13][5]=1; matrizAtual[13][9]=1;
-                    matrizAtual[13][10]=1; matrizAtual[13][11]=1; matrizAtual[11][1]=1;
-                    matrizAtual[11][6]=1; matrizAtual[11][8]=1; matrizAtual[11][13]=1;
+                    pradraoPulsar(matrizAtual);
                 }
                 else if(opcPadrao == 5) // Glider
                 {
-                    matrizAtual[1][2]=1;
-                    matrizAtual[2][3]=1;
-                    matrizAtual[3][1]=1;
-                    matrizAtual[3][2]=1;
-                    matrizAtual[3][3]=1;
+                    pradraoGlider(matrizAtual);
                 }
                 else if(opcPadrao == 6) // Heavy-weight spaceship
                 {
-                    matrizAtual[5][2]=1; matrizAtual[5][3]=1;
-                    matrizAtual[5][4]=1; matrizAtual[5][5]=1;
-                    matrizAtual[5][6]=1; matrizAtual[5][7]=1;
-                    matrizAtual[6][1]=1; matrizAtual[6][7]=1;
-                    matrizAtual[7][7]=1; matrizAtual[8][1]=1;
-                    matrizAtual[8][6]=1; matrizAtual[9][3]=1;
-                    matrizAtual[9][4]=1;
+                    pradraoHeavyWeightSpaceship(matrizAtual);
                 }
                 else if(opcPadrao == 7) // Execucao
                 {
