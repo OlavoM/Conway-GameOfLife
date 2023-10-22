@@ -189,9 +189,124 @@ void executarPasso(int atual[][TAM], int futura[][TAM])
     }
 }
 
-int main(){
+void execucaoNaTela(int matrizAtual[][TAM], int matrizFutura[][TAM])
+{
+    while(true)
+    {
+        system("cls");
+        imprimirMatriz(matrizAtual);
+        executarPasso(matrizAtual, matrizFutura); // Executa o passo na matriz futura
+        copiarMatriz(matrizFutura,matrizAtual); // Atualiza a matriz
+        printf("\n\nAperte Espaco para sair ou Enter para o executar o proximo passo");
+        int tecla = getch();
+        if(tecla == 32)
+        {
+            break;
+        }
+    }
+}
+
+void submenuPadraoPronto(int matrizAtual[][TAM], int matrizFutura[][TAM])
+{
+    while(true)
+    {
+        system("cls");
+        imprimirMatriz(matrizAtual);
+        printf("\n\n\nEscolha uma opcao:");
+        printf("\n0 - Voltar para o menu principal");
+        printf("\n1 - Block");
+        printf("\n2 - Bee-hive");
+        printf("\n3 - Blinker");
+        printf("\n4 - Pulsar");
+        printf("\n5 - Glider");
+        printf("\n6 - Heavy-weight spaceship");
+        printf("\n7 - Executar\n");
+        int opcao;
+        scanf("%d",&opcao);
+
+        if(opcao == 0)
+        {
+            break;
+        }
+        else if(opcao == 1) // Preenche a matriz com o padrao escolhido, no caso o Block
+        {
+            pradraoBlock(matrizAtual);
+        }
+        else if(opcao == 2) // Bee-hive
+        {
+            pradraoBeeHive(matrizAtual);
+        }
+        else if(opcao == 3) // Blinker
+        {
+            pradraoBlinker(matrizAtual);
+        }
+        else if(opcao == 4) // Pulsar
+        {
+            pradraoPulsar(matrizAtual);
+                }
+        else if(opcao == 5) // Glider
+        {
+            pradraoGlider(matrizAtual);
+        }
+        else if(opcao == 6) // Heavy-weight spaceship
+        {
+            pradraoHeavyWeightSpaceship(matrizAtual);
+        }
+        else if(opcao == 7) // Execucao
+        {
+            execucaoNaTela(matrizAtual, matrizFutura);
+            break;
+        }
+    }   
+}
+
+void submenuPreenchimentoManual(int matrizAtual[][TAM], int matrizFutura[][TAM])
+{
+    while(true)
+    {
+        system("cls");
+        imprimirMatriz(matrizAtual);
+        printf("\n\n\nEscolha uma opcao:");
+        printf("\n0 - Voltar para o menu principal");
+        printf("\n1 - Preencher uma celula");
+        printf("\n2 - executar\n");
+        int opcao;
+        scanf("%d",&opcao);
+
+        if(opcao == 0)
+        {
+            break;
+        }
+        else if(opcao == 1)
+        {
+            int posY = -1, posX = -1;
+            char caracY;
+            while((posY < 0) || (posY > 14)) // Verificacao de erros de entrada
+            {
+                printf("\n\nDigite a coordenada Y (em letra maiuscula): ");
+                scanf(" %c", &caracY);
+                posY = (int)(caracY-65); // Converte a letra para um indice inteiro
+            }
+            while((posX < 0) || (posX > 14))
+            {
+                printf("\n\nDigite a coordenada X: ");
+                scanf("%d", &posX);
+            }
+            matrizAtual[posY][posX] = 1; // Preenche a celula definida com 1 (vivo)
+        }
+        else if(opcao == 2)
+        {
+            execucaoNaTela(matrizAtual, matrizFutura);
+            break;
+        }
+    }
+}
+
+
+int main()
+{
     int matrizAtual[TAM][TAM], matrizFutura[TAM][TAM]; // Matriz atual que sera exibida e a futura, na qual sera efetuado o proximo passo
-    while(true) // Menu principal
+    while(true)
     {
         zerarMatriz(matrizAtual);
         printf("Jogo da vida de Conway\n\n");
@@ -207,124 +322,14 @@ int main(){
             break;
         }
 
-        else if (opc == 1) // Submenu - preenchimento manual
+        else if (opc == 1)
         {
-            while(true)
-            {
-                system("cls");
-                imprimirMatriz(matrizAtual);
-                printf("\n\n\nEscolha uma opcao:");
-                printf("\n0 - Voltar para o menu principal");
-                printf("\n1 - Preencher uma celula");
-                printf("\n2 - executar\n");
-                int opcManual;
-                scanf("%d",&opcManual);
-
-                if(opcManual == 0)
-                {
-                    break;
-                }
-                else if(opcManual == 1)
-                {
-                    int posY = -1, posX = -1;
-                    char caracY;
-                    while((posY < 0) || (posY > 14)) // Verificacao de erros de entrada
-                    {
-                        printf("\n\nDigite a coordenada Y (em letra maiuscula): ");
-                        scanf(" %c", &caracY);
-                        posY = (int)(caracY-65); // Converte a letra para um indice inteiro
-                    }
-                    while((posX < 0) || (posX > 14))
-                    {
-                        printf("\n\nDigite a coordenada X: ");
-                        scanf("%d", &posX);
-                    }
-                    matrizAtual[posY][posX] = 1; // Preenche a celula definida com 1 (vivo)
-                }
-                else if(opcManual == 2)
-                {
-                    while(true)
-                    {
-                        system("cls");
-                        imprimirMatriz(matrizAtual);
-                        executarPasso(matrizAtual, matrizFutura); // Executa o passo na matriz futura
-                        copiarMatriz(matrizFutura,matrizAtual); // Atualiza a matriz
-                        printf("\n\nAperte Espaco para sair ou Enter para o executar o proximo passo");
-                        int tecla = getch();
-                        if(tecla == 32)
-                        {
-                            break;
-                        }
-                    }
-                    break;
-                }
-            }
+            submenuPreenchimentoManual(matrizAtual, matrizFutura);
         }
 
-        else if(opc == 2) // Submenu - padrao pronto
+        else if(opc == 2)
         {
-            while(true)
-            {
-                system("cls");
-                imprimirMatriz(matrizAtual);
-                printf("\n\n\nEscolha uma opcao:");
-                printf("\n0 - Voltar para o menu principal");
-                printf("\n1 - Block");
-                printf("\n2 - Bee-hive");
-                printf("\n3 - Blinker");
-                printf("\n4 - Pulsar");
-                printf("\n5 - Glider");
-                printf("\n6 - Heavy-weight spaceship");
-                printf("\n7 - Executar\n");
-                int opcPadrao;
-                scanf("%d",&opcPadrao);
-
-                if(opcPadrao == 0)
-                {
-                    break;
-                }
-                else if(opcPadrao == 1) // Preenche a matriz com o padrao escolhido, no caso o Block
-                {
-                    pradraoBlock(matrizAtual);
-                }
-                else if(opcPadrao == 2) // Bee-hive
-                {
-                    pradraoBeeHive(matrizAtual);
-                }
-                else if(opcPadrao == 3) // Blinker
-                {
-                    pradraoBlinker(matrizAtual);
-                }
-                else if(opcPadrao == 4) // Pulsar
-                {
-                    pradraoPulsar(matrizAtual);
-                }
-                else if(opcPadrao == 5) // Glider
-                {
-                    pradraoGlider(matrizAtual);
-                }
-                else if(opcPadrao == 6) // Heavy-weight spaceship
-                {
-                    pradraoHeavyWeightSpaceship(matrizAtual);
-                }
-                else if(opcPadrao == 7) // Execucao
-                {
-                    while (true)
-                    {
-                        system("cls");
-                        imprimirMatriz(matrizAtual);
-                        executarPasso(matrizAtual, matrizFutura);
-                        copiarMatriz(matrizFutura,matrizAtual);
-                        printf("\n\nAperte Espaco para sair ou Enter para o executar o proximo passo");
-                        int tecla = getch();
-                        if(tecla == 32)
-                        {
-                            break;
-                        }
-                    }
-                    break;
-                }
-            }
+            submenuPadraoPronto(matrizAtual, matrizFutura);
         }
         system("cls");
     }
