@@ -9,6 +9,18 @@ Olavo M
 #include <conio.h>
 #define TAM 15
 
+int estaVivo(int x) 
+{
+    if (x == 1) 
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
 // Preenche a matriz com 0 (mortos)
 void zerarMatriz(int matriz[][TAM])
 {
@@ -30,20 +42,20 @@ void imprimirMatriz(int matriz[][TAM])
         printf("%c ", (char)(i+65)); // Letras das linhas, o uso de letras ajuda a evitar confusoes
         for(int j = 0;j < TAM; j++)
         {
-            if (matriz[i][j] == 0)
+            if (estaVivo(matriz[i][j]))
             {
-                printf("__"); // Morto imprime como underline (quadrado vazio)
+                printf("@@"); // Vivo imprime como @@ (quadrado cheio)
             }
             else
             {
-                printf("@@"); // Vivo imprime como @@ (quadrado cheio)
+                printf("__"); // Morto imprime como underline (quadrado vazio)
             }
             printf("|");
         }
         printf("\n");
     }
 }
-
+ 
 // Passa todos os valores da matriz original para a matriz copia
 void copiarMatriz(int original[][TAM], int copia[][TAM])
 {
@@ -121,39 +133,51 @@ void pradraoHeavyWeightSpaceship(int matriz[][TAM])
     matriz[9][4]=1;
 }
 
+int posicaoExiste(int x, int y)
+{
+    if ((x >= 0) && (x < TAM) && (y >= 0) && (y < TAM))
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
 // Retorna o numero de vizinhos vivos
 int contarVizinhos(int matriz[][TAM], int linha, int coluna)
 {
     int contador = 0;
-    if ((linha-1 >= 0) && (linha-1 < TAM) && (coluna-1 >= 0) && (coluna-1 < TAM) && (matriz[linha-1][coluna-1] == 1)) // Primeiro vizinho, canto superior esquerdo
+    if (posicaoExiste(linha-1, coluna-1) && estaVivo(matriz[linha-1][coluna-1])) // Primeiro vizinho a ser verificado, canto superior esquerdo
     {
         contador++; // O indice do vizinho nao esta fora da matriz (considerado morto) e o vizinho esta vivo, logo o contador eh incrementado
     }
-    if ((linha-1 >= 0) && (linha-1 < TAM) && (coluna >= 0) && (coluna < TAM) && (matriz[linha-1][coluna] == 1))
+    if (posicaoExiste(linha-1, coluna) && estaVivo(matriz[linha-1][coluna]))
     {
         contador++;
     }
-    if ((linha-1 >= 0) && (linha-1 < TAM) && (coluna+1 >= 0) && (coluna+1 < TAM) && (matriz[linha-1][coluna+1] == 1))
+    if (posicaoExiste(linha-1, coluna+1) && estaVivo(matriz[linha-1][coluna+1]))
     {
         contador++;
     }
-    if ((linha >= 0) && (linha < TAM) && (coluna-1 >= 0) && (coluna-1 < TAM) && (matriz[linha][coluna-1] == 1))
+    if (posicaoExiste(linha, coluna-1) && estaVivo(matriz[linha][coluna-1]))
     {
         contador++;
     }
-    if ((linha >= 0) && (linha < TAM) && (coluna+1 >= 0) && (coluna+1 < TAM) && (matriz[linha][coluna+1] == 1))
+    if (posicaoExiste(linha, coluna+1) && estaVivo(matriz[linha][coluna+1]))
     {
         contador++;
     }
-    if ((linha+1 >= 0) && (linha+1 < TAM) && (coluna-1 >= 0) && (coluna-1 < TAM) && (matriz[linha+1][coluna-1] == 1))
+    if (posicaoExiste(linha+1, coluna-1) && estaVivo(matriz[linha+1][coluna-1]))
     {
         contador++;
     }
-    if ((linha+1 >= 0) && (linha+1 < TAM) && (coluna >= 0) && (coluna < TAM) && (matriz[linha+1][coluna] == 1))
+    if (posicaoExiste(linha+1, coluna) && estaVivo(matriz[linha+1][coluna]))
     {
         contador++;
     }
-    if ((linha+1 >= 0) && (linha+1 < TAM) && (coluna+1 >= 0) && (coluna+1 < TAM) && (matriz[linha+1][coluna+1] == 1)) // Ultimo vizinho, canto inferior direito
+    if (posicaoExiste(linha+1, coluna+1) && estaVivo(matriz[linha+1][coluna+1])) // Ultimo vizinho, canto inferior direito
     {
         contador++;
     }
@@ -169,15 +193,15 @@ void executarPasso(int atual[][TAM], int futura[][TAM])
         for (int j = 0; j < TAM; j++)
         {
             n_vizinhos = contarVizinhos(atual, i, j);
-            if ((atual[i][j] == 1) && (n_vizinhos == 2))
+            if ( estaVivo(atual[i][j]) && (n_vizinhos == 2))
             {
                 futura[i][j]=1;
             }
-            else if ((atual[i][j] == 1) && (n_vizinhos == 3))
+            else if ( estaVivo(atual[i][j]) && (n_vizinhos == 3))
             {
                 futura[i][j]=1;
             }
-            else if ((atual[i][j] == 0) && (n_vizinhos==3))
+            else if ( estaVivo(atual[i][j]) && (n_vizinhos==3))
             {
                 futura[i][j]=1;
             }
